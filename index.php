@@ -69,29 +69,52 @@ $p=($a-$overall_d)/($overall_u-$overall_d);
 echo " Prob of up jump is (p)".$p."<br>";
 echo "prob of down jump is (q) ".$q=1/$p;
 echo "<br><br>Level 0<br>";
-echo $stock[0][0]=$strikeprice;
+echo $stock[0][0]=$spotprice;
+
+
  for ($i=1; $i <$n+1 ; $i++) {
-$stock[$i][0]=$stock[$i-1][0]*$u;
+   $stock[$i][0]=$stock[$i-1][0]*$overall_u;
  for ($j=1; $j <$i+1 ; $j++) {
+   $stock[$i][$j]=$stock[$i-1][$j-1]*$overall_d;
 
-   $stock[$i][$j]=$stock[$i-1][$j-1]*$d;
-
+    }
   }
-  }
 
-  for ($i=1; $i <$n+1 ; $i++) {
-  echo "<br><br>Level".$i;
- echo "<br>".$stock[$i][0];
-  for ($j=1; $j <$i+1 ; $j++) {
-echo  "<br>".$stock[$i][$j];
 
-   }
-   }
 
+     for ($i=1; $i <$n+1 ; $i++) {
+     echo "<br><br>Level".$i;
+    echo "<br> Stock ".$stock[$i][0];
+     for ($j=1; $j <$i+1 ; $j++) {
+   echo  "<br> Stock ".$stock[$i][$j];
+
+      }
+      }
+/*
+      for ($j=1; $j <$n+1 ; $j++) {
+        $optval[$n][$j]=max(0,$stock[$n][$j]-$strikeprice);
+        }
+
+         for ($i=$n-1; $i>-1 ; $i--) {
+           for ($j=1; $j <$i ; $j++) {
+               $optval[$i][$j]=($q*$optval[$i+1][$j]+(1-$q)*$optval[$i+1][$j+1])/exp(($rf/100)*$delta_t);
+
+           }
+         }
+
+         for ($i=$n-1; $i>-1 ; $i--) {
+           for ($j=1; $j <$i ; $j++) {
+                echo $optval[$i][$j]."<br>";
+                echo "in";
+           }
+         }
+*/
+
+      }
 
 }
 
-  }
+
 ?>
 </table>
 </body>
